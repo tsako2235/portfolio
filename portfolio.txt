@@ -101,7 +101,10 @@ portfolio       https://github.com/tsako2235/portfolio (push)
 試しにこの、portfolio.txtをpushしてみる。
 ちょっと待て、masterに登録されたぞ
 Ctrl+Shift+Gのその他の操作でステージング後、
+コミット後、その他の操作にて、「プッシュ先...」押下後
+登録したremoteリポジトリを選択したところ…masterに飛んでいってしまった。
 
+いったんローカルブランチを削除して作成しなおすことに
 
 6. VSCodeとHugo
 
