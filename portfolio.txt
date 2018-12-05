@@ -1,0 +1,126 @@
+Windows環境で開発環境を整えて、
+VSCode + Hugo + GitHubでポートフォリオを作成する話
+
+1. VSCodのインストール
+インストール後、VSCodeでtextを開く
+
+2. gitインストール
+ここを参考にインストール
+https://qiita.com/shinsumicco/items/a1c799640131ae33c792
+
+Ctrl+Shift+@でターミナルを開き、Gitのパスが通り、インストールされているか確認
+ TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+ $ git version
+ git version 2.19.1.windows.1
+
+3. gitインストール
+
+4. いつものを見て実施
+　https://guides.github.com/activities/hello-world/
+　とりまmasterへPullまで確認
+　portfolioのリポジトリと、master以外のブランチを作成しておく
+
+　作成したリポジトリはこちら
+　https://github.com/tsako2235/portfolio
+
+　ブランチはワンクッション置くという意味で、
+　仮にmarktime（調子を取る）とした、英語は壊滅的な評価しかもっていないので真似しないように。
+
+　プロジェクトディレクトリを作成
+　C:\project\portfolio
+
+5. VSCodeとGitHubの連携
+　Ctrl+Shift+Gにて、ソース管理を開いておく
+　Ctrl+Shift+@にて、ターミナルを開き、Pullしたいディレクトリに移動しておく
+ 
+　git pull [リポジトリ] [ブランチ]
+  TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git pull https://github.com/tsako2235/portfolio marktime
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/tsako2235/portfolio
+ * branch            marktime   -> FETCH_HEAD
+
+あかん、何いってのかわからんｗ
+だが、lsの結果きちんとREADMEのマークダウンファイルが落とせてるので
+大丈夫なんだろう…
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ ls -l
+total 3
+-rw-r--r-- 1 TAISHI-SAKO 197121 1899 Dec  5 18:38 portfolio.txt
+-rw-r--r-- 1 TAISHI-SAKO 197121   22 Dec  5 18:37 README.md
+
+しかし、ユーザとパスワードが要求されない、gitconfigをみてみよう
+うん、こういうのはたいていインストールディレクトリにconfigがないときは
+etcにあるものだと思ったけど、それっぽいファイルがない
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/Program Files/Git/etc
+$ ls
+bash.bash_logout  docx2txt.config  inputrc              mtab      nsswitch.conf         pki        protocols  tigrc
+bash.bashrc       fstab            install-options.txt  nanorc    package-versions.txt  profile    services   vimrc
+DIR_COLORS        hosts            msystem              networks  pkcs11                profile.d  ssh
+
+ここでCtrl+@でターミナルに移動できると知る。うむ
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/Program Files/Git/dev
+$ ls
+fd  mqueue  shm  stderr  stdin  stdout
+
+devにもない、ふぅん、ユーザプロファイル系かな、そういうの、嫌いだな（凛ちゃん感）
+結局コマンドで調べるいいんだよ、コマンドで、うん？ない
+なるほどな、公開されているpublicなGitHubでは参照系については、ユーザもパスも要らないんだな
+多分、ここではこう仮定しておこう、pushする時わかるはずだ、いずれわかる、いずれな
+
+$ git config -l --global
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+filter.lfs.clean=git-lfs clean -- %f
+user.name=tsako
+user.email=c.takosa.40@gmail.com
+core.editor='C:\Users\TAISHI-SAKO\AppData\Local\Programs\Microsoft VS Code\Code.exe' --wait
+
+やばいぞ、VSCodeめちゃくちゃ便利やん、Microsoftやるやん、
+VSSとか仕事で使ってた時は何死んでんねん、復旧くっそめんどい死ねやこら、とか
+C++からExcel弄るツール作ってた時、Excel Objectにバグがあって問い合わせたら
+Microsoft日本担当「本国に問い合わせてみます^^」
+本国「お前のような小規模なQAに対応している暇はない」とか塩対応されたとか
+あったからMicorosoftは糞って思ってたけど…
+
+ついでに、portfolioをリモートリポジトリに追加しておく
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git remote add portfolio https://github.com/tsako2235/portfolio
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git remote -v
+portfolio       https://github.com/tsako2235/portfolio (fetch)
+portfolio       https://github.com/tsako2235/portfolio (push)
+
+試しにこの、portfolio.txtをpushしてみる。
+ちょっと待て、masterに登録されたぞ
+Ctrl+Shift+Gのその他の操作でステージング後、
+コミット後、その他の操作にて、「プッシュ先...」押下後
+登録したremoteリポジトリを選択したところ…masterに飛んでいってしまった。
+
+fetchを確認し
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git fetch portfolio -v
+From https://github.com/tsako2235/portfolio
+ = [up to date]      master     -> portfolio/master
+ = [up to date]      marktime   -> portfolio/marktime
+
+作業ブランチを変更することに、さぁこれでリモート先も変わったかな
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git checkout marktime
+Switched to a new branch 'marktime'
+Branch 'marktime' set up to track remote branch 'marktime' from 'portfolio'.
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+
+6. VSCodeとHugo
+
+7. HugoとGitHub
