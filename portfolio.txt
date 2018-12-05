@@ -89,6 +89,15 @@ Microsoft日本担当「本国に問い合わせてみます^^」
 本国「お前のような小規模なQAに対応している暇はない」とか塩対応されたとか
 あったからMicorosoftは糞って思ってたけど…
 
+ついでに、portfolioをリモートリポジトリに追加しておく
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git remote add portfolio https://github.com/tsako2235/portfolio
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git remote -v
+portfolio       https://github.com/tsako2235/portfolio (fetch)
+portfolio       https://github.com/tsako2235/portfolio (push)
+
 6. VSCodeとHugo
 
 7. HugoとGitHub
