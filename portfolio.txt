@@ -121,6 +121,8 @@ Branch 'marktime' set up to track remote branch 'marktime' from 'portfolio'.
 
 TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
 
+よしよし、うまくｋいったぞ
+
 6. VSCodeとHugo
 
 7. HugoとGitHub
