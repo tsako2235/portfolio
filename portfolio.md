@@ -142,6 +142,30 @@ are?
 
 test
 
+commitして
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git commit portfolio.md portfolio.md
+hint: Waiting for your editor to close the file...
+[marktime 6a547ca] committed
+ 1 file changed, 10 insertions(+)
+
+pushして
+
+ TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git push portfolio marktime
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 401 bytes | 133.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/tsako2235/portfolio
+   6a4e280..6a547ca  marktime -> marktime
+
+ブランチ変更して
+
 TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
 $ git branch -a
 * marktime
