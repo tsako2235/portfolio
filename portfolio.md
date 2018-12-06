@@ -164,7 +164,7 @@ remote: Resolving deltas: 100% (1/1), completed with 1 local object.
 To https://github.com/tsako2235/portfolio
    6a4e280..6a547ca  marktime -> marktime
 
-ブランチ変更して
+ブランチ確認、うんmarktimeだな
 
 TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
 $ git branch -a
@@ -172,6 +172,33 @@ $ git branch -a
   master
   remotes/portfolio/marktime
   remotes/portfolio/master
+
+ブランチ変更
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git checkout master
+Switched to branch 'master'
+Your branch is behind 'portfolio/master' by 5 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+マージ…何か違和感が
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git merge
+Updating 7091341..4314901
+Fast-forward
+ portfolio.md  | 143 ++++++++++++++++++++++++++++++++
+ portfolio.txt | 257 +++++++++++++++++++++++++++++++++-------------------------
+ 2 files changed, 288 insertions(+), 112 deletions(-)
+ create mode 100644 portfolio.md
+
+んんんん？ちょっとまて、君どことマージしたの！？
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git push portfolio master
+Everything up-to-date
+
+あ、あれれ？
 
 
 6. VSCodeとHugo
