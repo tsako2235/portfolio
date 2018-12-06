@@ -16,6 +16,7 @@ Ctrl+Shift+@でターミナルを開き、Gitのパスが通り、インスト�
 3. gitインストール
 
 4. いつものを見て実施
+
 https://guides.github.com/activities/hello-world/
 とりまmasterへPullまで確認
 portfolioのリポジトリと、master以外のブランチを作成しておく
@@ -35,6 +36,7 @@ Ctrl+Shift+@にて、ターミナルを開き、Pullしたいディレクトリ�
  
 git pull [リポジトリ] [ブランチ]
 TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+
 $ git pull https://github.com/tsako2235/portfolio marktime
 remote: Enumerating objects: 3, done.
 remote: Counting objects: 100% (3/3), done.
