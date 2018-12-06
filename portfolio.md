@@ -13,8 +13,6 @@ Ctrl+Shift+@でターミナルを開き、Gitのパスが通り、インスト�
  $ git version
  git version 2.19.1.windows.1
 
-3. gitインストール
-
 4. いつものを見て実施
 https://guides.github.com/activities/hello-world/
 とりまmasterへPullまで確認
@@ -137,6 +135,10 @@ To https://github.com/tsako2235/portfolio
 
 完璧だ、あとはmasterへのマージpushか…
 GitHubのWebでなくともクライアントから勿論できるんだよな？
+うむ、どちらかというとmaster側でmarktimeブランチからマージというイメージだな
+Web上ではできた
+
+are?
 
 6. VSCodeとHugo
 
