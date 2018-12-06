@@ -140,6 +140,16 @@ Web上ではできた
 
 are?
 
+test
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -a
+* marktime
+  master
+  remotes/portfolio/marktime
+  remotes/portfolio/master
+
+
 6. VSCodeとHugo
 
 7. HugoとGitHub
