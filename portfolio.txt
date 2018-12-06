@@ -16,25 +16,27 @@ Ctrl+Shift+@でターミナルを開き、Gitのパスが通り、インスト�
 3. gitインストール
 
 4. いつものを見て実施
-　https://guides.github.com/activities/hello-world/
-　とりまmasterへPullまで確認
-　portfolioのリポジトリと、master以外のブランチを作成しておく
 
-　作成したリポジトリはこちら
-　https://github.com/tsako2235/portfolio
+https://guides.github.com/activities/hello-world/
+とりまmasterへPullまで確認
+portfolioのリポジトリと、master以外のブランチを作成しておく
 
-　ブランチはワンクッション置くという意味で、
-　仮にmarktime（調子を取る）とした、英語は壊滅的な評価しかもっていないので真似しないように。
+作成したリポジトリはこちら
+https://github.com/tsako2235/portfolio
 
-　プロジェクトディレクトリを作成
-　C:\project\portfolio
+ブランチはワンクッション置くという意味で、
+仮にmarktime（調子を取る）とした、英語は壊滅的な評価しかもっていないので真似しないように。
+
+プロジェクトディレクトリを作成
+C:\project\portfolio
 
 5. VSCodeとGitHubの連携
-　Ctrl+Shift+Gにて、ソース管理を開いておく
-　Ctrl+Shift+@にて、ターミナルを開き、Pullしたいディレクトリに移動しておく
+Ctrl+Shift+Gにて、ソース管理を開いておく
+Ctrl+Shift+@にて、ターミナルを開き、Pullしたいディレクトリに移動しておく
  
-　git pull [リポジトリ] [ブランチ]
-  TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+git pull [リポジトリ] [ブランチ]
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+
 $ git pull https://github.com/tsako2235/portfolio marktime
 remote: Enumerating objects: 3, done.
 remote: Counting objects: 100% (3/3), done.
@@ -104,9 +106,40 @@ Ctrl+Shift+Gのその他の操作でステージング後、
 コミット後、その他の操作にて、「プッシュ先...」押下後
 登録したremoteリポジトリを選択したところ…masterに飛んでいってしまった。
 
-いったんローカルブランチを削除して作成しなおすことに
+fetchを確認し
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git fetch portfolio -v
+From https://github.com/tsako2235/portfolio
+ = [up to date]      master     -> portfolio/master
+ = [up to date]      marktime   -> portfolio/marktime
+
+作業ブランチを変更することに、さぁこれでリモート先も変わったかな
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git checkout marktime
+Switched to a new branch 'marktime'
+Branch 'marktime' set up to track remote branch 'marktime' from 'portfolio'.
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+
+よしよし、うまくいったぞ、次はコマンドからpushしてみる
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git push portfolio
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 340 bytes | 340.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/tsako2235/portfolio
+   62ee769..6bc5685  marktime -> marktime
+
+完璧だ、あとはmasterへのマージpushか…
+GitHubのWebでなくともクライアントから勿論できるんだよな？
 
 6. VSCodeとHugo
 
 7. HugoとGitHub
-
