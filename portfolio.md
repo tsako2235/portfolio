@@ -193,14 +193,99 @@ Fast-forward
  create mode 100644 portfolio.md
 
 んんんん？ちょっとまて、君どことマージしたの！？
+もちろんremoteのGitHubに変更はない
+あ、あれれ？
+
+もっかい・・marktimeにブランチ変更して
+
+AISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git checkout marktime
+Switched to branch 'marktime'
+Your branch is up to date with 'portfolio/marktime'.
+
+ファイルをコミットして
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git commit portfolio.md
+hint: Waiting for your editor to close the file...
+[marktime c1a2ad9] a
+ 1 file changed, 28 insertions(+), 1 deletion(-)
+
+プッシュして
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git push portfolio marktime
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 808 bytes | 269.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/tsako2235/portfolio
+   04ab5b3..c1a2ad9  marktime -> marktime
+
+ブランチ変更して
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'portfolio/master'.
+
+マージ・・ああ、きちんとブランチ指定ができてなかったからか
+きちんとマージできた
 
 TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
-$ git push portfolio master
-Everything up-to-date
+$ git merge marktime
+Updating 4314901..c1a2ad9
+Fast-forward
+ portfolio.md | 67 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 65 insertions(+), 2 deletions(-)
 
 あ、あれれ？a
+何か違和感あるな、リモートのmarktimeブランチからリモートのmasterブランチへ
+マージしたいんだから、ローカルブランチを変更する点に違和感がある。
+直接リモートのmasterでマージできるべきなんじゃないか？
+少なくともGitHubのWeb上ではそういう操作だ
 
+とりあえず、ローカルブランチをmaster、marktimeから
+portfolio.master portfolio.marktime
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -m master portfolio.master
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -m marktime portfolio.marktime
+
+$ git branch -a
+  marktime
+* master
+  remotes/portfolio/marktime
+  remotes/portfolio/master
+  remotes/portfolio/portfolio.marktime
+  
+  んんんんん？
+　なるほど、安易にリネームしてはいけないのか…しかしローカルでmasterは…
+
+　と、とりあえず、marktimeを戻す。そして紐づけ情報を確認
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -vv
+* marktime         cbda04a [portfolio/marktime] ok
+  portfolio.master c5197e5 [portfolio/master: ahead 1] a-
+
+ま、masterも戻そう。
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -vv
+* marktime cbda04a [portfolio/marktime] ok
+  master   c5197e5 [portfolio/master: ahead 1] a-
+
+  んんんん、あそっかこのテキストを編集しているんだから名称どうとか以前に
+  先にマージしなさいということね。
 
 6. VSCodeとHugo
 
+
 7. HugoとGitHub
+
