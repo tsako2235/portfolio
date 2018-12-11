@@ -198,7 +198,7 @@ TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
 $ git push portfolio master
 Everything up-to-date
 
-あ、あれれ？
+あ、あれれ？a
 
 
 6. VSCodeとHugo
