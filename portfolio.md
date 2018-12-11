@@ -283,6 +283,14 @@ $ git branch -vv
   んんんん、あそっかこのテキストを編集しているんだから名称どうとか以前に
   先にマージしなさいということね。
 
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git branch -vv
+  marktime 07c97c7 [portfolio/marktime] add message
+* master   b8b0991 [portfolio/master] add message master
+
+よしよし、で、再度名称を変更、する前にこのテキストをきちんとコミットして
+それから名称を変更してみよう
+
 6. VSCodeとHugo
 
 
