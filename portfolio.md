@@ -291,6 +291,57 @@ $ git branch -vv
 よしよし、で、再度名称を変更、する前にこのテキストをきちんとコミットして
 それから名称を変更してみよう
 
+結論から言うと、まず、ローカルのマスターブランチは不要
+んで、誤ってくっそださい、portfolio.masterやportfolio.marktimeとかいう
+GitHub上のブランチは削除
+
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
+$ git branch -a
+  marktime
+* master
+  remotes/portfolio/marktime
+  remotes/portfolio/master
+  remotes/portfolio/portfolio.marktime
+  remotes/portfolio/portfolio.master
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -D master
+Deleted branch master (was aef9bbe).
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -a
+* marktime
+  remotes/portfolio/marktime
+  remotes/portfolio/master
+  remotes/portfolio/portfolio.marktime
+  remotes/portfolio/portfolio.master
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -vv
+* marktime c8f9fa4 [portfolio/marktime] add message
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git push portfolio :portfolio.marktime
+To https://github.com/tsako2235/portfolio
+ - [deleted]         portfolio.marktime
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -a
+* marktime
+  remotes/portfolio/marktime
+  remotes/portfolio/master
+  remotes/portfolio/portfolio.master
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git push portfolio :portfolio.master
+To https://github.com/tsako2235/portfolio
+ - [deleted]         portfolio.master
+
+あと、個人的に慣れないうちはコマンド省略しない、これが要点だとわかった。
+コミット、プッシュ自にリポジトリ名とローカルブランチ名を省略しない、これが重要だ
+「git push プッシュ先リポジトリ ローカルのブランチ名:リモートのブランチ名」
+
 6. VSCodeとHugo
 
 
