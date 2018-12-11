@@ -266,6 +266,23 @@ $ git branch -a
   んんんんん？
 　なるほど、安易にリネームしてはいけないのか…しかしローカルでmasterは…
 
+　と、とりあえず、marktimeを戻す。そして紐づけ情報を確認
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -vv
+* marktime         cbda04a [portfolio/marktime] ok
+  portfolio.master c5197e5 [portfolio/master: ahead 1] a-
+
+ま、masterも戻そう。
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ git branch -vv
+* marktime cbda04a [portfolio/marktime] ok
+  master   c5197e5 [portfolio/master: ahead 1] a-
+
+  んんんん、あそっかこのテキストを編集しているんだから名称どうとか以前に
+  先にマージしなさいということね。
+
 6. VSCodeとHugo
 
 
