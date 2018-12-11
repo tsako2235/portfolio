@@ -261,6 +261,10 @@ $ git branch -a
 * master
   remotes/portfolio/marktime
   remotes/portfolio/master
+  remotes/portfolio/portfolio.marktime
+  
+  んんんんん？
+　なるほど、安易にリネームしてはいけないのか…しかしローカルでmasterは…
 
 6. VSCodeとHugo
 
