@@ -344,6 +344,19 @@ To https://github.com/tsako2235/portfolio
 
 6. VSCodeとHugo
 
+さて、まずはHugoのWin版クライアントのダウンロードだ
+https://github.com/gohugoio/hugo/releases
+hugo_0.52_Windows-64bit.zip 7.4 MB
+
+解答して、パス通して…
+
+ぐぐぐ、そんなことよりターミナルを大きくしたい。Ctrl+@押下した時に
+ターミナルをフォーカスした時ちょびっとパネルが上に大きくなるようにしたい
+Toggle Maximized Panelで解決したわ
+
+ターミナル開いたままエディタに戻るのどうやんねんCtrl+@じゃ消えるやん
+
 
 7. HugoとGitHub
 
+Xx
