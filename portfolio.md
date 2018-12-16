@@ -533,6 +533,8 @@ Press Ctrl+C to stop
 
 おうけい、見れた
 
+うーん、これ最小構成から始めないとよくわからんな
+
 7. HugoとGitHub
 
 
