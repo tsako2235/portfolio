@@ -348,7 +348,7 @@ To https://github.com/tsako2235/portfolio
 https://github.com/gohugoio/hugo/releases
 hugo_0.52_Windows-64bit.zip 7.4 MB
 
-解答して、パス通して…
+解凍して、パス通して…
 
 ぐぐぐ、そんなことよりターミナルを大きくしたい。Ctrl+@押下した時に
 ターミナルをフォーカスした時ちょびっとパネルが上に大きくなるようにしたい
@@ -356,7 +356,185 @@ Toggle Maximized Panelで解決したわ
 
 ターミナル開いたままエディタに戻るのどうやんねんCtrl+@じゃ消えるやん
 
+気を取り直してっと以下サイトを参考に進めてみる
+https://qiita.com/satzz/items/e24bd703fc04fb45f7ef
+まずサイトを作るそうだ
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ hugo new site test
+Congratulations! Your new Hugo site is created in C:\project\portfolio\test.
+
+Just a few more steps and you're ready to go:
+
+1. Download a theme into the same-named folder.
+   Choose a theme from https://themes.gohugo.io/, or
+   create your own with the "hugo new theme <THEMENAME>" command.
+2. Perhaps you want to add some content. You can add single files
+   with "hugo new <SECTIONNAME>\<FILENAME>.<FORMAT>".
+3. Start the built-in live server via "hugo server".
+
+Visit https://gohugo.io/ for quickstart guide and full documentation.
+
+で、公開
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ hugo server
+Error: Unable to locate Config file. Perhaps you need to create a new site.
+       Run `hugo help new` for details.
+
+だめやん、そうかnewしたあとローカルサーバのディレクトリに移動してないからか？
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+$ cd test
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test (marktime)
+$ hugo server
+Building sites … WARN 2018/12/16 17:30:09 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a templa
+te below /layouts with one of these filenames: categories/terms.en.html.html, categories/list.en.html.html, categories/terms.html.html, categories/list.html.html, categories/terms.en.html, categories/list.en.html, categories/terms.html, categories/list.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/terms.html, taxonomy/list.html, _default/terms.en.html.html, _default/list.en.html.html, _default/terms.html.html, _default/list.html.html, _default/terms.en.html, _default/list.en.html, _default/terms.html, _default/list.html
+WARN 2018/12/16 17:30:09 Found no layout for "home", language "en", output format "HTML": create a template below /layouts with one of these filenames: index.en.html.html, home.en.html.html, list.en.html.html, index.html.html, home.html.html, list.html.html, index.en.html, home.en.html, list.en.html, index.html, home.html, list.html, _default/index.en.html.html, _default/home.en.html.html,
+_default/list.en.html.html, _default/index.html.html, _default/home.html.html, _default/list.html.html, _default/index.en.html, _default/home.en.html, _default/list.en.html, _default/index.html, _default/home.html, _default/list.html
+WARN 2018/12/16 17:30:09 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a template below /layouts
+with one of these filenames: tags/terms.en.html.html, tags/list.en.html.html, tags/terms.html.html, tags/list.html.html, tags/terms.en.html, tags/list.en.html, tags/terms.html, tags/list.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/terms.html, taxonomy/list.html, _default/terms.en.html.html, _default/list.en.html.html, _default/terms.html.html, _default/list.html.html, _default/terms.en.html, _default/list.en.html, _default/terms.html, _default/list.html
+
+                   | EN
++------------------+----+
+  Pages            |  3
+  Paginator pages  |  0
+  Non-page files   |  0
+  Static files     |  0
+  Processed images |  0
+  Aliases          |  0
+  Sitemaps         |  1
+  Cleaned          |  0
+
+Total in 29 ms
+Watching for changes in C:\project\portfolio\test\{content,data,layouts,static}
+Watching for config changes in C:\project\portfolio\test\config.toml
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+WARN 2018/12/16 17:30:18 Found no layout for "home", language "en", output format "HTML": create a template below /layouts with one of these filenames: index.en.html.html, home.en.html.html, list.en.html.html, index.html.html, home.html.html, list.html.html, index.en.html, home.en.html, list.en.html, index.html, home.html, list.html, _default/index.en.html.html, _default/home.en.html.html,
+_default/list.en.html.html, _default/index.html.html, _default/home.html.html, _default/list.html.html, _default/index.en.html, _default/home.en.html, _default/list.en.html, _default/index.html, _default/home.html, _default/list.html
+
+よしよし、起動と接続もOKだ
+次は、何々、テーマを入力とな？テンプレートみたいな？
+
+このチャラカというかいうのがよさそうだ、最終的には双葉の掲示板みたいにしたい
+過去に公開していたサイトもそんな感じだったのだ、背景乳白色（POI）、あの茶色文字、
+返信で緑文字、あれがいいんだ、目に優しいし
+https://themes.gohugo.io/charaka-hugo-theme/
+
+はぁ、なるほどね、gitでcloneしてきたテーマを反映するわけね
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test (marktime)
+git clone https://github.com/natarajmb/charaka-hugo-theme.git ./themes/charaka
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test (marktime)
+$ code ./config.toml
+
+テーマサイトを参考に設定して、サーバ再起動
+toml…toml…？そういうフォーマットもあるのか  
+
+baseurl = "https://example.com"
+languageCode = "en"
+～
+[[params.social]]
+  url = "https://twitter.com/natarajmb"
+  fa_icon = "fab fa-twitter"
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test (marktime)
+$ hugo server
+Error: "C:\project\portfolio\test\config.toml:19:6": While parsing config: (19, 6): was expecting token =, but got "_icon" instead
+
+んん？…何かテーマがきちんと参照できてないぽい？
+しゃーない、テーマサイトの説明通りやってみるか
+
+https://themes.gohugo.io/charaka-hugo-theme/
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes (marktime)
+$ rm -fr ./charaka
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes (marktime)
+$ git clone https://github.com/natarajmb/charaka-hugo-theme.git
+Cloning into 'charaka-hugo-theme'...
+remote: Enumerating objects: 211, done.
+Receiving objects:  74% (157/211), 1.56 MiB | 1.55 MiB/s   s   ed 0 (delta 0), pack-reused 211
+Receiving objects: 100% (211/211), 1.57 MiB | 1.54 MiB/s, done.
+Resolving deltas: 100% (95/95), done.
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test (marktime)
+$ hugo server
+Error: "C:\project\portfolio\test\config.toml:19:6": While parsing config: (19, 6): was expecting token =, but got "_icon" instead
+
+だめみたいですね
+ああ、「Take a look in the exampleSite folder.」て書いてあるやん
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test (marktime)
+$ cd themes/
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes (marktime)
+$ ls
+charaka-hugo-theme
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes (marktime)
+$ cd charaka-hugo-theme/
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes/charaka-hugo-theme (master)
+$ ls
+archetypes  exampleSite  images  layouts  LICENSE.md  package.json  README.md  scss  static  theme.toml
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes/charaka-hugo-theme (master)
+$ cd exampleSite/
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes/charaka-hugo-theme/exampleSite (master)
+$ cp -r ./* ./../../../
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes/charaka-hugo-theme/exampleSite (master)
+$ cd ..
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes/charaka-hugo-theme (master)
+$ ls
+archetypes  exampleSite  images  layouts  LICENSE.md  package.json  README.md  scss  static  theme.toml
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes/charaka-hugo-theme (master)
+$ cd ..
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes (marktime)
+$ ls
+charaka-hugo-theme
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test/themes (marktime)
+$ cd ..
+
+よし、上書きしたぞ
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/test (marktime)
+$ hugo server
+Building sites …
+                   | EN
++------------------+----+
+  Pages            | 31
+  Paginator pages  |  0
+  Non-page files   |  0
+  Static files     |  4
+  Processed images |  0
+  Aliases          | 12
+  Sitemaps         |  1
+  Cleaned          |  0
+
+Total in 99 ms
+Watching for changes in C:\project\portfolio\test\{content,data,layouts,static,themes}
+Watching for config changes in C:\project\portfolio\test\config.toml
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+
+おうけい、見れた
 
 7. HugoとGitHub
+
+
 
 Xx
