@@ -350,6 +350,8 @@ GitHub上のブランチは削除
 
 ## 4. VSCodeとHugo
 
+### とりあえず動かしてみる
+
 さて、まずはHugoのWin版クライアントのダウンロードだ  
 https://github.com/gohugoio/hugo/releases  
 hugo_0.52_Windows-64bit.zip 7.4 MB
@@ -540,6 +542,73 @@ https://themes.gohugo.io/charaka-hugo-theme/
 おうけい、見れた
 
 うーん、これ最小構成から始めないとよくわからんな
+それとこのリポジトリ配下は公開するようにしたい
+バックアップとってから
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+    $ cd ..
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project
+    $ ls -l
+    total 0
+    drwxr-xr-x 1 TAISHI-SAKO 197121 0 Dec 18 15:18 portfolio
+    drwxr-xr-x 1 TAISHI-SAKO 197121 0 Dec 18 15:18 portfolio_bk
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project
+    $ cp -pr portfolio/ portfolio_bk
+
+再度サイト作成のコマンドをうってみよう
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project
+    $ hugo new site portfolio
+    Error: C:\project\portfolio already exists and is not empty
+
+そうですか、already existsですか
+融通聞いてもええやん
+まぁ、ええわ、多分他ディレクトリで作ったのもってきても大丈夫やろう
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project
+    $ hugo new site hugo
+    Congratulations! Your new Hugo site is created in C:\project\hugo.
+
+    Just a few more steps and you're ready to go:
+
+    1. Download a theme into the same-named folder.
+      Choose a theme from https://themes.gohugo.io/, or
+      create your own with the "hugo new theme <THEMENAME>" command.
+    2. Perhaps you want to add some content. You can add single files
+      with "hugo new <SECTIONNAME>\<FILENAME>.<FORMAT>".
+    3. Start the built-in live server via "hugo server".
+
+    Visit https://gohugo.io/ for quickstart guide and full documentation.
+
+できた
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo
+    $ ls -l
+    total 1
+    drwxr-xr-x 1 TAISHI-SAKO 197121  0 Dec 18 16:20 archetypes
+    -rw-r--r-- 1 TAISHI-SAKO 197121 82 Dec 18 16:20 config.toml
+    drwxr-xr-x 1 TAISHI-SAKO 197121  0 Dec 18 16:20 content
+    drwxr-xr-x 1 TAISHI-SAKO 197121  0 Dec 18 16:20 data
+    drwxr-xr-x 1 TAISHI-SAKO 197121  0 Dec 18 16:20 layouts
+    drwxr-xr-x 1 TAISHI-SAKO 197121  0 Dec 18 16:20 static
+    drwxr-xr-x 1 TAISHI-SAKO 197121  0 Dec 18 16:20 themes
+
+さて、改めてそれぞれのディレクトリ、ファイルの意味を調べよう
+しかしマルチカーソル、便利だ
+
+archetypes .. 記事の素になるmarkdown置き場
+config.toml .. サイト設定ファイル
+content .. コンテンツを配置するフォルダ
+data .. 認知しなくていいフォルダ
+layouts .. 画面構成のテンプレ置き場
+static .. CSSとかJavascriptとか
+themes .. テーマ置き場
+
+こんな感じ、ふーむ、まだわからんな
+何をどういじれるのか具体的に調査しなければ、目的のテーマなど作れん
+何だか当初の簡単にポートフォリオ作るぜぇという目的から離れている気がする…
 
 7. HugoとGitHub
 
