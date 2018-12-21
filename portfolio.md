@@ -1,3 +1,15 @@
+---
+title: "HUGOでブログ作成  →  GitHub Pagesで公開する手順"
+date: 2017-12-25T14:36:54+09:00　# 作成日時が入る
+draft: true　# trueの場合は下書き状態。このままビルドしてもサイトには表示されな
+categories: ["HUGO"]
+tags: ["GitHub","HUGO"]
+---
+
++++
+Title = "テスト記事"
++++
+
 # Windows環境で開発環境を整えて、VSCode + Hugo + GitHubでポートフォリオを作成する話
 
 ## 1. VSCodのインストール
@@ -803,7 +815,11 @@ hugo new theme テーマ名
 
 ビルドされたindex.htmlが出来てますね…
 これは、どういうことだろう  
-とりあえずhttp://localhost:1313/portfolioで表示はされる。  
+とりあえず以下URLで表示はされる。  
+http://localhost:1313/portfolio
+
+少し調べてみたが、xx.mdというファイル名でビルドした際は、  
+xx/index.htmlに変換されるらしい、そういうものか
 
 ぎゃあああああああここでgitコミット中メッセージテキストを閉じるのに
 Ctrl+Wを押下する筈が、Ctrl+Shift+Wを誤って押下し、ファイルロックするという失態
@@ -823,6 +839,11 @@ Ctrl+Wを押下する筈が、Ctrl+Shift+Wを誤って押下し、ファイル�
     hint: Waiting for your editor to close the file...
     [marktime 5c9408b] add message
     1 file changed, 213 insertions(+), 7 deletions(-)
+
+うーん、結局のところ公式読むのが一番やなたぶん
+https://gohugo.io/templates
+
+
 
 7. HugoとGitHub
 
