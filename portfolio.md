@@ -813,8 +813,16 @@ Ctrl+Wを押下する筈が、Ctrl+Shift+Wを誤って押下し、ファイル�
     TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/.git (GIT_DIR!)
     $ rm -fr next-index-1648.lock
 
-TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/.git (GIT_DIR!)
-$ rm -fr index.lock
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/.git (GIT_DIR!)
+    $ rm -fr index.lock
+
+うむ
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+    $ git commit portfolio.md
+    hint: Waiting for your editor to close the file...
+    [marktime 5c9408b] add message
+    1 file changed, 213 insertions(+), 7 deletions(-)
 
 7. HugoとGitHub
 
