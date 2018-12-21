@@ -598,17 +598,223 @@ https://themes.gohugo.io/charaka-hugo-theme/
 さて、改めてそれぞれのディレクトリ、ファイルの意味を調べよう
 しかしマルチカーソル、便利だ
 
-archetypes .. 記事の素になるmarkdown置き場
-config.toml .. サイト設定ファイル
-content .. コンテンツを配置するフォルダ
-data .. 認知しなくていいフォルダ
-layouts .. 画面構成のテンプレ置き場
-static .. CSSとかJavascriptとか
-themes .. テーマ置き場
+archetypes .. 記事の素になるmarkdown置き場  
+config.toml .. サイト設定ファイル  
+content .. コンテンツ（.md）を配置するフォルダ  
+data .. 認知しなくていいフォルダ  
+layouts .. 画面構成のテンプレ置き場  
+static .. CSSとかJavascriptとか  
+themes .. テーマ置き場  
 
 こんな感じ、ふーむ、まだわからんな
 何をどういじれるのか具体的に調査しなければ、目的のテーマなど作れん
 何だか当初の簡単にポートフォリオ作るぜぇという目的から離れている気がする…
+
+layoutsフォルダにpartialsフォルダを作成し、
+headerとfotterのhtmlを作成
+
+layoutsフォルダ直下にトップページであるindex.htmlを作成
+挿入するheader.htmlとfotter.htmlに関する記述をindex.htmlに記載して
+
+    {{ partial "site_header.html" . }}
+    ～
+    {{ partial "site_footer.html" . }}
+
+hugoコマンドでビルドを実行…
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo
+    $ hugo
+    Building sites … WARN 2018/12/21 19:59:08 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a templa
+    te below /layouts with one of these filenames: tags/terms.en.html.html, tags/list.en.html.html, tags/terms.html.html, tags/list.html.html, tags/terms.en.html, tags/list.en.html, tags/terms.html, tags/list.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/terms.html, taxonomy/list.html, _default/terms.en.html.html, _default/list.en.html.html, _default/terms.html.html, _default/list.html.html, _default/terms.en.html, _default/list.en.html, _default/terms.html, _default/list.html
+    WARN 2018/12/21 19:59:08 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a template below /layouts
+    with one of these filenames: categories/terms.en.html.html, categories/list.en.html.html, categories/terms.html.html, categories/list.html.html, categories/terms.en.html, categories/list.en.html, categories/terms.html, categories/list.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/terms.html, taxonomy/list.html, _default/terms.en.html.html, _default/list.en.html.html, _default/terms.html.html, _default/list.html.html, _default/terms.en.html, _default/list.en.html, _default/terms.html, _default/list.html
+    Total in 12 ms
+    Error: Error building site: failed to render pages: render of "home" failed: "C:\project\hugo\layouts\index.html:12:7": execute of
+    template failed: template: index.html:12:7: executing "index.html" at <partial "site_footer...>: error calling partial: Partial "site_footer.html" not found
+
+めっさ警告されてるけど、大丈夫なんか？  
+あ、テーマねぇよって怒られてるのか？  
+その場合はstaticが参照されるんじゃないのか…？  
+
+まぁ、そういうなら、新たにテーマを作成しますか
+hugo new theme テーマ名
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo
+    $ hugo new theme test
+    Creating theme at C:\project\hugo\themes\test
+
+よし、では
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo
+    $ hugo
+    Building sites … WARN 2018/12/21 20:18:21 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a templa
+    te below /layouts with one of these filenames: categories/terms.en.html.html, categories/list.en.html.html, categories/terms.html.html, categories/list.html.html, categories/terms.en.html, categories/list.en.html, categories/terms.html, categories/list.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/terms.html, taxonomy/list.html, _default/terms.en.html.html, _default/list.en.html.html, _default/terms.html.html, _default/list.html.html, _default/terms.en.html, _default/list.en.html, _default/terms.html, _default/list.html
+    WARN 2018/12/21 20:18:21 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a template below /layouts
+    with one of these filenames: tags/terms.en.html.html, tags/list.en.html.html, tags/terms.html.html, tags/list.html.html, tags/terms.en.html, tags/list.en.html, tags/terms.html, tags/list.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/terms.html, taxonomy/list.html, _default/terms.en.html.html, _default/list.en.html.html, _default/terms.html.html, _default/list.html.html, _default/terms.en.html, _default/list.en.html, _default/terms.html, _default/list.html
+    Total in 1 ms
+    Error: Error building site: failed to render pages: render of "home" failed: "C:\project\hugo\layouts\index.html:12:7": execute of
+    template failed: template: index.html:12:7: executing "index.html" at <partial "site_footer...>: error calling partial: Partial "site_footer.html" not found
+
+だめやん…んんんん、ん？
+
+    index.html:12:7: executing "index.html" at <partial "site_footer...>: error calling partial: Partial "site_footer.html" not found
+
+あれ、何かよくみたらindex.htmlがだめと書いてあるじゃん？
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo/layouts/partials
+    $ ls -l
+    total 2
+    -rw-r--r-- 1 TAISHI-SAKO 197121 58 Dec 21 19:53 site_fotter.html
+    -rw-r--r-- 1 TAISHI-SAKO 197121 64 Dec 21 19:55 site_header.html
+
+あっ（察し）
+
+気を取り直して、再度
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo
+    $ hugo
+    Building sites … WARN 2018/12/21 20:22:21 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a templa
+    te below /layouts with one of these filenames: tags/terms.en.html.html, tags/list.en.html.html, tags/terms.html.html, tags/list.html.html, tags/terms.en.html, tags/list.en.html, tags/terms.html, tags/list.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/terms.html, taxonomy/list.html, _default/terms.en.html.html, _default/list.en.html.html, _default/terms.html.html, _default/list.html.html, _default/terms.en.html, _default/list.en.html, _default/terms.html, _default/list.html
+    WARN 2018/12/21 20:22:21 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a template below /layouts
+    with one of these filenames: categories/terms.en.html.html, categories/list.en.html.html, categories/terms.html.html, categories/list.html.html, categories/terms.en.html, categories/list.en.html, categories/terms.html, categories/list.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/terms.html, taxonomy/list.html, _default/terms.en.html.html, _default/list.en.html.html, _default/terms.html.html, _default/list.html.html, _default/terms.en.html, _default/list.en.html, _default/terms.html, _default/list.html
+
+                    | EN
+    +------------------+----+
+    Pages            |  4
+    Paginator pages  |  0
+    Non-page files   |  0
+    Static files     |  0
+    Processed images |  0
+    Aliases          |  0
+    Sitemaps         |  1
+    Cleaned          |  0
+
+    Total in 63 ms
+
+よーしよしよし
+ここまではまだ、サイトトップが作られただけだし、
+こっから記事を作成しよう  
+
+試しに今書いている文書をcontentにぶっこむ
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo
+    $ cp -p ./../portfolio/portfolio.md ./content/
+
+さてさて
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo
+    $ hugo
+    Building sites … WARN 2018/12/21 20:30:54 Found no layout for "page", language "en", output format "HTML": create a template below
+    /layouts with one of these filenames: single.en.html.html, single.html.html, single.en.html, single.html, _default/single.en.html.html, _default/single.html.html, _default/single.en.html, _default/single.html
+    WARN 2018/12/21 20:30:54 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a template below /layouts
+    with one of these filenames: categories/category.terms.en.html.html, categories/terms.en.html.html, categories/list.en.html.html, categories/category.terms.html.html, categories/terms.html.html, categories/list.html.html, categories/category.terms.en.html, categories/terms.en.html, categories/list.en.html, categories/category.terms.html, categories/terms.html, categories/list.html, taxonomy/category.terms.en.html.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/category.terms.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/category.terms.en.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/category.terms.html, taxonomy/terms.html, taxonomy/list.html, category/category.terms.en.html.html, category/terms.en.html.html, category/list.en.html.html, category/category.terms.html.html, category/terms.html.html, category/list.html.html, category/category.terms.en.html, category/terms.en.html, category/list.en.html, category/category.terms.html, category/terms.html, category/list.html, _default/category.terms.en.html.html, _default/terms.en.html.html, _default/list.en.html.html, _default/category.terms.html.html,
+    _default/terms.html.html, _default/list.html.html, _default/category.terms.en.html, _default/terms.en.html, _default/list.en.html,
+    _default/category.terms.html, _default/terms.html, _default/list.html
+    WARN 2018/12/21 20:30:54 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a template below /layouts
+    with one of these filenames: tags/tag.terms.en.html.html, tags/terms.en.html.html, tags/list.en.html.html, tags/tag.terms.html.html, tags/terms.html.html, tags/list.html.html, tags/tag.terms.en.html, tags/terms.en.html, tags/list.en.html, tags/tag.terms.html, tags/terms.html, tags/list.html, taxonomy/tag.terms.en.html.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/tag.terms.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/tag.terms.en.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/tag.terms.html, taxonomy/terms.html, taxonomy/list.html, tag/tag.terms.en.html.html, tag/terms.en.html.html, tag/list.en.html.html, tag/tag.terms.html.html, tag/terms.html.html, tag/list.html.html, tag/tag.terms.en.html, tag/terms.en.html, tag/list.en.html, tag/tag.terms.html, tag/terms.html, tag/list.html, _default/tag.terms.en.html.html, _default/terms.en.html.html, _default/list.en.html.html, _default/tag.terms.html.html, _default/terms.html.html, _default/list.html.html, _default/tag.terms.en.html, _default/terms.en.html, _default/list.en.html, _default/tag.terms.html, _default/terms.html, _default/list.html
+
+                    | EN
+    +------------------+----+
+    Pages            |  4
+    Paginator pages  |  0
+    Non-page files   |  0
+    Static files     |  0
+    Processed images |  0
+    Aliases          |  0
+    Sitemaps         |  1
+    Cleaned          |  0
+
+    Total in 30 ms
+
+んん、また警告がいっぱい出てるな、そんなに部品、足りないですかね…
+あ、とりあえず記事のレイアウトがないんですね、追加追加
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo/layouts
+    $ mkdir _default
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo/layouts
+    $ code ./_default/single.html
+
+{{ .Content  }}、これで記事が挿入できるとのこと
+
+    {{ partial "site_header.html" . }}
+    <article>
+        {{ .Content }}
+    </article>
+    {{ partial "site_footer.html" . }}
+
+いざ
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo
+    $ hugo
+    Building sites … WARN 2018/12/21 20:37:57 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a templa
+    te below /layouts with one of these filenames: categories/category.terms.en.html.html, categories/terms.en.html.html, categories/list.en.html.html, categories/category.terms.html.html, categories/terms.html.html, categories/list.html.html, categories/category.terms.en.html, categories/terms.en.html, categories/list.en.html, categories/category.terms.html, categories/terms.html, categories/list.html, taxonomy/category.terms.en.html.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/category.terms.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/category.terms.en.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/category.terms.html, taxonomy/terms.html, taxonomy/list.html, category/category.terms.en.html.html, category/terms.en.html.html, category/list.en.html.html, category/category.terms.html.html, category/terms.html.html, category/list.html.html, category/category.terms.en.html, category/terms.en.html, category/list.en.html, category/category.terms.html, category/terms.html, category/list.html, _default/category.terms.en.html.html, _default/terms.en.html.html, _default/list.en.html.html, _default/category.terms.html.html, _default/terms.html.html, _default/list.html.html, _default/category.terms.en.html, _default/terms.en.html, _default/list.en.html, _default/category.terms.html, _default/terms.html, _default/list.html
+    WARN 2018/12/21 20:37:57 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a template below /layouts
+    with one of these filenames: tags/tag.terms.en.html.html, tags/terms.en.html.html, tags/list.en.html.html, tags/tag.terms.html.html, tags/terms.html.html, tags/list.html.html, tags/tag.terms.en.html, tags/terms.en.html, tags/list.en.html, tags/tag.terms.html, tags/terms.html, tags/list.html, taxonomy/tag.terms.en.html.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/tag.terms.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/tag.terms.en.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/tag.terms.html, taxonomy/terms.html, taxonomy/list.html, tag/tag.terms.en.html.html, tag/terms.en.html.html, tag/list.en.html.html, tag/tag.terms.html.html, tag/terms.html.html, tag/list.html.html, tag/tag.terms.en.html, tag/terms.en.html, tag/list.en.html, tag/tag.terms.html, tag/terms.html, tag/list.html, _default/tag.terms.en.html.html, _default/terms.en.html.html, _default/list.en.html.html, _default/tag.terms.html.html, _default/terms.html.html, _default/list.html.html, _default/tag.terms.en.html, _default/terms.en.html, _default/list.en.html, _default/tag.terms.html, _default/terms.html, _default/list.html
+
+                    | EN
+    +------------------+----+
+    Pages            |  5
+    Paginator pages  |  0
+    Non-page files   |  0
+    Static files     |  0
+    Processed images |  0
+    Aliases          |  0
+    Sitemaps         |  1
+    Cleaned          |  0
+
+    Total in 20 ms
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo
+    $ hugo server
+    Building sites … WARN 2018/12/21 20:38:14 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a templa
+    te below /layouts with one of these filenames: categories/category.terms.en.html.html, categories/terms.en.html.html, categories/list.en.html.html, categories/category.terms.html.html, categories/terms.html.html, categories/list.html.html, categories/category.terms.en.html, categories/terms.en.html, categories/list.en.html, categories/category.terms.html, categories/terms.html, categories/list.html, taxonomy/category.terms.en.html.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/category.terms.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/category.terms.en.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/category.terms.html, taxonomy/terms.html, taxonomy/list.html, category/category.terms.en.html.html, category/terms.en.html.html, category/list.en.html.html, category/category.terms.html.html, category/terms.html.html, category/list.html.html, category/category.terms.en.html, category/terms.en.html, category/list.en.html, category/category.terms.html, category/terms.html, category/list.html, _default/category.terms.en.html.html, _default/terms.en.html.html, _default/list.en.html.html, _default/category.terms.html.html, _default/terms.html.html, _default/list.html.html, _default/category.terms.en.html, _default/terms.en.html, _default/list.en.html, _default/category.terms.html, _default/terms.html, _default/list.html
+    WARN 2018/12/21 20:38:14 Found no layout for "taxonomyTerm", language "en", output format "HTML": create a template below /layouts
+    with one of these filenames: tags/tag.terms.en.html.html, tags/terms.en.html.html, tags/list.en.html.html, tags/tag.terms.html.html, tags/terms.html.html, tags/list.html.html, tags/tag.terms.en.html, tags/terms.en.html, tags/list.en.html, tags/tag.terms.html, tags/terms.html, tags/list.html, taxonomy/tag.terms.en.html.html, taxonomy/terms.en.html.html, taxonomy/list.en.html.html, taxonomy/tag.terms.html.html, taxonomy/terms.html.html, taxonomy/list.html.html, taxonomy/tag.terms.en.html, taxonomy/terms.en.html, taxonomy/list.en.html, taxonomy/tag.terms.html, taxonomy/terms.html, taxonomy/list.html, tag/tag.terms.en.html.html, tag/terms.en.html.html, tag/list.en.html.html, tag/tag.terms.html.html, tag/terms.html.html, tag/list.html.html, tag/tag.terms.en.html, tag/terms.en.html, tag/list.en.html, tag/tag.terms.html, tag/terms.html, tag/list.html, _default/tag.terms.en.html.html, _default/terms.en.html.html, _default/list.en.html.html, _default/tag.terms.html.html, _default/terms.html.html, _default/list.html.html, _default/tag.terms.en.html, _default/terms.en.html, _default/list.en.html, _default/tag.terms.html, _default/terms.html, _default/list.html
+
+                    | EN
+    +------------------+----+
+    Pages            |  5
+    Paginator pages  |  0
+    Non-page files   |  0
+    Static files     |  0
+    Processed images |  0
+    Aliases          |  0
+    Sitemaps         |  1
+    Cleaned          |  0
+
+    Total in 36 ms
+    Watching for changes in C:\project\hugo\{content,data,layouts,static}
+    Watching for config changes in C:\project\hugo\config.toml
+    Serving pages from memory
+    Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+    Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+    Press Ctrl+C to stop
+
+うーん、やっぱりできてないですねぇ、publicを覗いてみる…  
+おろ？portfolioディレクトリが出来てる…  
+配置したのはportfolio.md、contentディレクトリに配置したmdファイルと
+同名のディレクトリ、更にそのportfolioディレクトリを除いてみると…
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo/public/portfolio
+    $ ls -l
+    total 36
+    -rw-r--r-- 1 TAISHI-SAKO 197121 36271 Dec 21 20:37 index.html
+
+ビルドされたindex.htmlが出来てますね…
+これは、どういうことだろう  
+とりあえずhttp://localhost:1313/portfolioで表示はされる。  
+
+ぎゃあああああああここでgitコミット中メッセージテキストを閉じるのに
+Ctrl+Wを押下する筈が、Ctrl+Shift+Wを誤って押下し、ファイルロックするという失態
+
+まま、ロックファイルやし、消せばええやろ
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/.git (GIT_DIR!)
+    $ rm -fr next-index-1648.lock
+
+TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio/.git (GIT_DIR!)
+$ rm -fr index.lock
 
 7. HugoとGitHub
 
