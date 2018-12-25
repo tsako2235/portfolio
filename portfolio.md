@@ -105,7 +105,7 @@ Microsoft日本担当「本国に問い合わせてみます^^」
 本国「お前のような小規模なQAに対応している暇はない」とか塩対応されたとか
 あったからMicorosoftは糞って思ってたけど…
 
-ついでに、portfolioをリモートリポジトリに追加しておく
+ついでに、portfolioを別名として追加しておく
 
     TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (master)
     $ git remote add portfolio https://github.com/tsako2235/portfolio
@@ -629,10 +629,281 @@ https://gohugo.io/categories/getting-started
     Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
     Press Ctrl+C to stop
 
-うむ、これだけだな
+うむ、これだけだな、とりあえず次に進むか
 
 7. HugoとGitHub
 
+さて、HugoとGitHubについてだが…  
+まずは公開用のリポジトリを作成せねばいけないらしい、  
+作るか
 
+ブランチを作成して
 
-Xx
+https://github.com/tsako2235/blog
+
+設定で、GitHub Pagesのmasterブランチになるように変更
+
+https://ユーザまたは組織名.github.io/リポジトリ名
+
+https://tsako2235.github.io/blog
+よし、何か表示された、で  
+さっきつくったHugoのビルド済みファイルをPushしてやればいいのかな  
+
+えーと、今現在のremoteは、以下2件のみだから
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/portfolio (marktime)
+    $ git remote -v
+    portfolio       https://github.com/tsako2235/portfolio (fetch)
+    portfolio       https://github.com/tsako2235/portfolio (push)
+
+あー、なるほど、今masterブランチしかないのか
+直接触りたくないので、えーと、これmarktimeと同じ名称でいいのかな
+
+    git pull origin pullしたいリモートブランチ名:ローカルブランチ名
+
+さすがに同名はやばいと思ったのかリポジトリ名_ブランチ名とすることに
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog
+    $ git init
+    Initialized empty Git repository in C:/project/blog/.git/
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (master)
+    $ git pull https://github.com/tsako2235/blog.git marktime:blog_marktime
+    remote: Enumerating objects: 3, done.
+    remote: Counting objects: 100% (3/3), done.
+    remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+    Unpacking objects: 100% (3/3), done.
+    From https://github.com/tsako2235/blog
+    * [new branch]      marktime   -> blog_marktime
+
+えーと、リポジトリ別名はblogでいいな
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (master)
+    $ git remote add blog https://github.com/tsako2235/blog
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (master)
+    $ git remote -v
+    blog    https://github.com/tsako2235/blog (fetch)
+    blog    https://github.com/tsako2235/blog (push)
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (master)
+    $ git branch -a
+    blog_marktime
+    * master
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (master)
+    $ git fetch blog -v
+    From https://github.com/tsako2235/blog
+    * [new branch]      marktime   -> blog/marktime
+    * [new branch]      master     -> blog/master
+
+はぁ、master先生また出来てる…  
+portfolioは、あとから消そう  
+で、ローカルルールとして、pullするときのブランチ名はリポジトリ名_ブランチ名としよう  
+絶対いつか混乱するしな
+あ、あれ？gitて他リポジトリに切り替えたい時どうすりゃいいんだ？
+
+ああ、ディレクトリ移動だけで大丈夫なんか
+とりま、ローカルのmasterを削除
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $     git branch -d master
+    Deleted branch master (was 686be34).
+
+うむ
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ git branch -a
+    * blog_marktime
+    remotes/blog/marktime
+    remotes/blog/master
+
+さて、さきほどビルドしたHugoのリソースをプッシュだぁ！  
+と、ちょっとまて、svnと一緒でテーマ落とした時とか.gitファイルあるぞ  
+そのままプッシュして本当に、大丈夫なのかにゃ？  
+
+何か嫌な予感がするのでとりあえず削除しておこう
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugo
+    $ find . -name .git | xargs rm -rf
+    
+おけ、あとpublicディレクトリだけでいいのか、公開するのは…  
+んんー全体をプッシュしてpublicディレクトリ配下のみを  
+公開したい…ルート変更できるかな？  
+
+うそやろ？いったんmaster殺してmasterディレクトリにするの  
+そんなばかな、ぐ、ぐぬぬsettingsでルートをdocにできるが…
+Hugoから吐かれるフォルダは、publicなんだよなぁ…  
+windowsでシンボリックリンクみたいのできるんだっけか？
+ぐ、ぐぬうコマンドがわからん、VSCodeのターミナルbashだし
+普通のUnix系シンボリックコマンドでもうまく読み替えてくれるだろたぶん
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/hugopwd
+    $ ln -s public docs
+
+できた、さすがやな！！  
+よっしゃコピーしてプッシュや！
+
+あ、リンクが怒られた…コピーしてからシンボリックリンクにしようね
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ git add .
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ git commit
+    hint: Waiting for your editor to close the file...
+    [blog_marktime c5a18ff] 2018-12-25 16:35:00 tsako2235 add hugo files
+    32 files changed, 1811 insertions(+)
+    create mode 100644 archetypes/default.md
+    create mode 100644 config.toml
+    create mode 100644 content/posts/my-first-post.md
+    create mode 100644 docs/404.html
+    create mode 100644 docs/categories/index.html
+    create mode 100644 docs/categories/index.xml
+    create mode 100644 docs/categories/page/1/index.html
+    create mode 100644 docs/css/styles.css
+    create mode 100644 docs/index.html
+    create mode 100644 docs/index.xml
+    create mode 100644 docs/js/highlight.js
+    create mode 100644 docs/js/jssocials.js
+    create mode 100644 docs/page/1/index.html
+    create mode 100644 docs/sitemap.xml
+    create mode 100644 docs/tags/index.html
+    create mode 100644 docs/tags/index.xml
+    create mode 100644 docs/tags/page/1/index.html
+    create mode 100644 public/404.html
+    create mode 100644 public/categories/index.html
+    create mode 100644 public/categories/index.xml
+    create mode 100644 public/categories/page/1/index.html
+    create mode 100644 public/css/styles.css
+    create mode 100644 public/index.html
+    create mode 100644 public/index.xml
+    create mode 100644 public/js/highlight.js
+    create mode 100644 public/js/jssocials.js
+    create mode 100644 public/page/1/index.html
+    create mode 100644 public/sitemap.xml
+    create mode 100644 public/tags/index.html
+    create mode 100644 public/tags/index.xml
+    create mode 100644 public/tags/page/1/index.html
+    create mode 160000 themes
+
+よっしゃ、プッシュや
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ git push blog blog_marktime:marktime
+    Enumerating objects: 34, done.
+    Counting objects: 100% (34/34), done.
+    Delta compression using up to 4 threads
+    Compressing objects: 100% (23/23), done.
+    Writing objects: 100% (33/33), 27.99 KiB | 1.40 MiB/s, done.
+    Total 33 (delta 7), reused 0 (delta 0)
+    remote: Resolving deltas: 100% (7/7), done.
+    To https://github.com/tsako2235/blog
+    686be34..c5a18ff  blog_marktime -> marktime
+
+よすよす
+
+masterへのpullリクエストを作成して、承認と
+で、改めてmasterブランチのセッティングからGitHub Pagesの設定で
+公開する対象をdocsに変更、と
+
+さぁ、みてみるぜよ…は？  
+何か、テーマ反映されていないんですが
+あ、ああ、そうだよね
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ cat config.toml
+    baseURL = "http://example.org/"
+    languageCode = "en-us"
+    title = "My New Hugo Site"
+    theme = "charaka"
+
+よしよし
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ cat config.toml
+    baseURL = "https://tsako2235.github.io/blog/"
+    languageCode = "en-us"
+    title = "My New Hugo Site"
+    theme = "charaka"
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ git add .
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ git commit .
+    hint: Waiting for your editor to close the file...
+    [blog_marktime ec6c056] 2018-12-25 16:47:26 tsako2235 changes base url
+    1 file changed, 1 insertion(+), 1 deletion(-)
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ git push blog blog_marktime:marktime
+    Enumerating objects: 5, done.
+    Counting objects: 100% (5/5), done.
+    Delta compression using up to 4 threads
+    Compressing objects: 100% (3/3), done.
+    Writing objects: 100% (3/3), 379 bytes | 379.00 KiB/s, done.
+    Total 3 (delta 1), reused 0 (delta 0)
+    remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+    To https://github.com/tsako2235/blog
+    c5a18ff..ec6c056  blog_marktime -> marktime
+
+今度はhugoコマンドを忘れるくそ
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ hugo
+    Building sites …
+                    | EN
+    +------------------+----+
+    Pages            |  7
+    Paginator pages  |  0
+    Non-page files   |  0
+    Static files     |  3
+    Processed images |  0
+    Aliases          |  3
+    Sitemaps         |  1
+    Cleaned          |  0
+
+    Total in 47 ms
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ git add .
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ git commit .
+    hint: Waiting for your editor to close the file...
+    [blog_marktime 56bcaff] 2018-12-25 16:50:01 tsako2235 issue hugo commands
+    11 files changed, 20 insertions(+), 20 deletions(-)
+
+    TAISHI-SAKO@DESKTOP-LV0F0HG MINGW64 /c/project/blog (blog_marktime)
+    $ git push blog blog_marktime:marktime
+    Enumerating objects: 41, done.
+    Counting objects: 100% (41/41), done.
+    Delta compression using up to 4 threads
+    Compressing objects: 100% (16/16), done.
+    Writing objects: 100% (22/22), 1.61 KiB | 411.00 KiB/s, done.
+    Total 22 (delta 12), reused 0 (delta 0)
+    remote: Resolving deltas: 100% (12/12), completed with 6 local objects.
+    To https://github.com/tsako2235/blog
+    ec6c056..56bcaff  blog_marktime -> marktime
+
+あれ、だめだな…
+publicは大丈夫だ
+
+    <link rel="stylesheet" href="https://tsako2235.github.io/blog//css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+
+は？docsは…シンボリックリンク死んでるやん、なんで？
+
+    <link rel="stylesheet" href="http://example.org//css/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+
+つかシンボリックリンクコマンド、これコピーしてるだけじゃねｋ？
+ローカルもdocs配下更新されてない、というかリンクじゃなさそう。
+
+しゃーない、あとでhugoコマンド発行時にコピペするようにするか  
+とりあえずmasterまでの反映完了っと  
+よし、表示され…あれ？最初につくった記事、どこいっただ
+うーん、ない、contentsにはあるけど、なかったことになっているぽいー  
+baseurl変更したからか？試しにnew postして試してみよう
+
