@@ -1,14 +1,10 @@
 ---
 title: "HUGOでブログ作成  →  GitHub Pagesで公開する手順"
 date: 2017-12-25T14:36:54+09:00　# 作成日時が入る
-draft: true　# trueの場合は下書き状態。このままビルドしてもサイトには表示されな
+draft: false　# trueの場合は下書き状態。このままビルドしてもサイトには表示されな
 categories: ["HUGO"]
 tags: ["GitHub","HUGO"]
 ---
-
-+++
-Title = "テスト記事"
-+++
 
 # Windows環境で開発環境を整えて、VSCode + Hugo + GitHubでポートフォリオを作成する話
 
@@ -906,4 +902,16 @@ publicは大丈夫だ
 よし、表示され…あれ？最初につくった記事、どこいっただ
 うーん、ない、contentsにはあるけど、なかったことになっているぽいー  
 baseurl変更したからか？試しにnew postして試してみよう
+
+ああ、draft: trueになってるからか
+
+    draft: true
+    ---
+
+だめだぁ…んん？どうもテーマにより、参照するcontent配下のパスが違うような
+今回のcharakaをみてみると、スクリプトの内容的に  
+記事を配置するのは ./content/posts/xx.md  
+となるようだ、そうか
+
+よし、できた！
 
